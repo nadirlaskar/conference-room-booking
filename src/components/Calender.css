@@ -1,0 +1,47 @@
+.Calender-main {
+    background: #09d3ac;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.Calender-main:active {
+    color: #09d3ac;
+    background: white;
+}
+
+.react-datepicker.Calender-popup {
+    border-color: #09d3ac;
+}
+
+.Calender-popup .react-datepicker__header,
+.Calender-popup .react-datepicker__today-button {
+    background: white;
+    border-color: transparent;
+}
+
+.Calender-popup .react-datepicker__today-button {
+    background-color: #09d3ac;
+    color: white
+}
+
+.react-datepicker.Calender-popup .react-datepicker__triangle,
+.react-datepicker.Calender-popup .react-datepicker__triangle::before {
+    border-bottom-color: #09d3ac!important;
+}
+
+.react-datepicker.Calender-popup .react-datepicker__navigation--previous:hover {
+    border-right-color: #09d3ac;
+    outline: none;
+}
+
+.react-datepicker.Calender-popup .react-datepicker__navigation--next:hover {
+    border-left-color: #09d3ac;
+    outline: none;
+}
+
+.react-datepicker.Calender-popup .react-datepicker__day.react-datepicker__day--selected {
+    background-color: #09d3ac
+}

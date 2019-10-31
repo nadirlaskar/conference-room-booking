@@ -1,6 +1,6 @@
 .Booking-main {
     position: relative;
-    border: 1px solid red;
+    border: 0px solid red;
     width: 100%;
     height: 100%;
 }
@@ -8,17 +8,23 @@
 .Booking-header {
     display: flex;
     position: relative;
-    border: 1px solid blue;
+    border: 0px solid blue;
 }
 
 .Booking-content {
     align-self: right;
     position: relative;
-    border: 1px solid yellow;
+    border: 0px solid yellow;
 }
 
 .Booking-counter {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+}
+
+.Booking-date {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-grow: 1;
 }
