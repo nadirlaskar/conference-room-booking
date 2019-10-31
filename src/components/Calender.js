@@ -26,6 +26,7 @@ function Calender({minDate=new Date(), value, onDateSelected}){
         todayButton="Today"
         customInput={<CustomInput/>}
       />
+      <div className="Calender-desc">{"is the date of booking."}</div>
     </div>
   );
 }

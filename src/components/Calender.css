@@ -1,3 +1,8 @@
+.Calender-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .Calender-main {
     background: #09d3ac;
     color: white;
@@ -10,6 +15,12 @@
 .Calender-main:active {
     color: #09d3ac;
     background: white;
+}
+
+.Calender-desc {
+    text-align: center;
+    font-size: small;
+    margin: 8px;
 }
 
 .react-datepicker.Calender-popup {
