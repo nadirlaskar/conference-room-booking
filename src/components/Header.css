@@ -1,0 +1,11 @@
+.Header-logo {
+    height: 10vmin;
+    align-self: center;
+}
+
+.Header-main {
+    background-color: white;
+    display: flex;
+    font-size: calc(10px + 2vmin);
+    color: #282c34;
+}

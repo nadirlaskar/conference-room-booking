@@ -1,0 +1,33 @@
+.Counter-wrapper {
+    display: inline-block;
+    margin: 8px;
+    user-select: none;
+    width: fit-content;
+}
+
+.Counter-box {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+    line-height: 20px;
+    margin: 4px 8px;
+}
+
+.Counter-button {
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    background: #09d3ac;
+    color: white;
+    cursor: pointer;
+}
+
+.Counter-button:active {
+    background: white;
+    color: #09d3ac;
+}
+
+.Counter-desc {
+    text-align: center;
+    font-size: small;
+}
