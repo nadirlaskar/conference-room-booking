@@ -1,0 +1,26 @@
+ul.List-main {
+    list-style: none;
+    padding: 0px;
+}
+
+ul.List-main li {
+    padding: 8px;
+    font-size: 20px;
+}
+
+ul.List-main li:not(:last-child) {
+    border-bottom: 1px solid grey;
+}
+
+ul.List-main li.List-selected-item,
+ul.List-main li:active {
+    border: none;
+    background: #09d3ac;
+    color: white;
+}
+
+ul.List-main li:not(.List-selected-item):hover {
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}

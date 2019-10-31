@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import "./Booking.css";
 import Counter from "./Counter";
 import Calender from './Calender';
+import rooms from '../assets/rooms';
+import RoomList from './List';
 
 function Booking() {
   let [date, setDate] = useState(new Date());
@@ -16,7 +18,9 @@ function Booking() {
           <Counter count={allocatedDuration} desc={"Allocated minutes"} onChange={(count)=>setAllocatedDuration(count)} />
         </div>
       </div>
-      <div className="Booking-content"></div>
+      <div className="Booking-content">
+          <RoomList items={rooms}/>
+      </div>
     </div>
   );
 }
