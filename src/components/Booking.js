@@ -61,6 +61,8 @@ function Booking() {
         </div>
         <div className="Booking-counter">
           <Counter
+            min={30}
+            max={60*24}
             step={5}
             count={allocatedDuration}
             desc={"Allocated minutes"}
