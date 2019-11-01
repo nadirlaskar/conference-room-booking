@@ -1,0 +1,31 @@
+.Dialog-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.Dialog-box {
+    top: 10%;
+    left: 10%;
+    background: white;
+}
+
+.Dialog-header {
+    font-size: 20px;
+    margin: 20px;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.Dialog-content {
+    margin: 20px;
+    padding: 8px;
+    color: #666;
+}
