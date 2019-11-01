@@ -9,7 +9,7 @@ function checkInDuration(time,selectedTime,checkInDuration){
     return duration>0 && duration<=checkInDuration;
 }
 
-function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDuration }) {
+function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDuration, onScrollPositionChange }) {
   let scale = [], hr=0, min=0;
   const el = useRef(null);
   const [currentTime,setCurrentTime]  = useState(new Date());
@@ -25,19 +25,25 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
 
   useEffect(()=>{
       if(!isLoaded){
-          if(currentTimeScrollPosition>0) el.current.scrollLeft=currentTimeScrollPosition-el.current.getBoundingClientRect().left;
+          if(currentTimeScrollPosition>0) {
+              el.current.scrollLeft=currentTimeScrollPosition-el.current.getBoundingClientRect().left;
+              onScrollPositionChange(el.current.scrollLeft);
+            }
           setLoaded(currentTimeScrollPosition>0);
       }
       let id = setInterval(()=>{
         setCurrentTime(new Date());
       })
       return ()=> clearInterval(id);
-  }, [currentTimeScrollPosition, isLoaded])
+  }, [currentTimeScrollPosition, isLoaded, onScrollPositionChange])
 
   const [continueScroll,setContinueScroll] = useState(-1);
 
   const keepScrolling = (step)=>{
-      if(el.current.scrollLeft+step>=(currentTimeScrollPosition-el.current.getBoundingClientRect().left)) el.current.scrollLeft+=step;
+      if(el.current.scrollLeft+step>=(currentTimeScrollPosition-el.current.getBoundingClientRect().left)) {
+          el.current.scrollLeft+=step;
+          onScrollPositionChange(el.current.scrollLeft);
+        }
       setContinueScroll(setTimeout(()=>keepScrolling(step),100));
   }
 
@@ -83,7 +89,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
   );
 }
 
-function TimeSlider({ currentTime, selectedTime, onSelect, children, allocatedDuration }) {
+function TimeSlider({ currentTime, selectedTime, onSelect, children, allocatedDuration, onScroll }) {
   return (
     <div className='TimeSlider-container'>
       <TimeScale
@@ -94,6 +100,7 @@ function TimeSlider({ currentTime, selectedTime, onSelect, children, allocatedDu
         currentTime={currentTime}
         onSelect={onSelect}
         allocatedDuration={parseInt(allocatedDuration)}
+        onScrollPositionChange={onScroll}
       />
       <div className="TimeSlider-main">{children}</div>
     </div>

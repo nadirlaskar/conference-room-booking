@@ -39,6 +39,7 @@
     align-items: center;
     max-width: 80vw;
     overflow: hidden;
+    padding: 8px;
 }
 
 .TimeScale-time-block {

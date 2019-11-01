@@ -18,12 +18,12 @@
 
 .Booking-content .Booking-room-names {
     position: relative;
-    top: 40px;
     width: 20%;
+    top: 32px;
 }
 
 .Booking-content .Booking-room-times {
-    margin: 8px;
+    margin: 0 8px;
 }
 
 .Booking-counter {

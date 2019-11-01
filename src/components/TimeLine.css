@@ -1,0 +1,27 @@
+.TimeLine-main {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    max-width: 80vw;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.TimeLine-cell {
+    font-size: 16px;
+    min-width: 35px;
+    height: 27px;
+    max-height: 30px;
+    background: #ccc;
+    margin: 0 8px;
+}
+
+.TimeLine-cell-booked {
+    background-color: red;
+}
+
+.TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0 8px;
+}

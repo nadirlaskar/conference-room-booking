@@ -1,25 +1,25 @@
-.List-main {
+ul.List-main {
     list-style: none;
     padding: 0px;
-    user-select: none;
+    margin: 0px;
 }
 
-.List-main .List-item {
+ul.List-main li {
     padding: 8px;
     font-size: 20px;
 }
 
-.List-main .List-item:not(:last-child) {
+ul.List-main li:not(:last-child) {
     border-bottom: 1px solid #eeeeee;
 }
 
-.List-main .List-item.List-selected-item,
-.List-main .List-item:active {
+ul.List-main li.List-selected-item,
+ul.List-main li:active {
     background: #09d3ac;
     color: white;
 }
 
-.List-main .List-item:not(.List-selected-item):hover {
+ul.List-main li:not(.List-selected-item):hover {
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }

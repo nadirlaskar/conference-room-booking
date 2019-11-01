@@ -6,13 +6,33 @@ import rooms from "../assets/rooms";
 import RoomList from "./List";
 import TimeLineList from "./List";
 import TimeLine from "./TimeLine";
-import TimeSlider  from './TimeSlider';
+import TimeSlider from "./TimeSlider";
+
+function getbookings(date) {
+  let item = localStorage.getItem(date);
+  if (item) return JSON.parse(item);
+  else {
+    debugger;
+    return rooms.reduce((b, r, i) => {
+      b[r.name] = {
+        username: "demo",
+        date,
+        startTime: "17:30",
+        allocatedDuration: 30,
+        reason: "Meeting"
+      };
+      return b;
+    }, {});
+  }
+}
 
 function Booking() {
   let [date, setDate] = useState(new Date());
   let [allocatedDuration, setAllocatedDuration] = useState(30);
   let [selectedRoom, setSelectedRoom] = useState(0);
-  let [selectedTime, setSelectedTime] = useState('');
+  let [selectedTime, setSelectedTime] = useState("");
+  let [position,setPosition] = useState(-1);
+
   return (
     <div className="Booking-main">
       <div className="Booking-header">
@@ -37,9 +57,19 @@ function Booking() {
           />
         </div>
         <div className="Booking-room-times">
-          <TimeSlider onSelect={(time)=>{setSelectedTime(time)}} selectedTime={selectedTime} 
-              allocatedDuration={allocatedDuration}>
-            <TimeLineList items={rooms} data={{selectedTime}} ItemRenderer={TimeLine} />
+          <TimeSlider
+            onSelect={time => {
+              setSelectedTime(time);
+            }}
+            selectedTime={selectedTime}
+            allocatedDuration={allocatedDuration}
+            onScroll={position=>setPosition(position)}
+          >
+            <TimeLineList
+              items={rooms}
+              data={{ selectedTime, bookings: getbookings(date), position }}
+              ItemRenderer={TimeLine}
+            />
           </TimeSlider>
         </div>
       </div>
