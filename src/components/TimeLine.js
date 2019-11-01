@@ -12,7 +12,7 @@ function TimeLine({id, item, data}){
         el.current.scrollLeft=position-357-276;
     });
 
-    let hashMap = Object.values(bookings).reduce((map,booking)=>{
+    let hashMap = bookings[item.name]?bookings[item.name].reduce((map,booking)=>{
         let [hr,min] = booking.startTime.split(':').map(x=>parseInt(x));
         for(let i=0;i<booking.allocatedDuration;i++){
             let book = {...booking};
@@ -21,7 +21,7 @@ function TimeLine({id, item, data}){
             map[(hr*60+min)+i]=book;
         }
         return map;
-    },{})
+    },{}):{}
 
   for(let i=0;i<maxTime;i+=step){
     let isBooked = hashMap[i]?hashMap[i]:false;

@@ -13,18 +13,35 @@ function getbookings(date) {
   let item = localStorage.getItem(date);
   if (item) return JSON.parse(item);
   else {
-    debugger;
     return rooms.reduce((b, r, i) => {
-      b[r.name] = {
+      b[r.name] = [{
         username: "demo",
         date,
         startTime: `${new Date().getHours()}:${new Date().getMinutes() + 20}`,
         allocatedDuration: 30,
         reason: "Meeting"
-      };
+      }];
       return b;
     }, {});
   }
+}
+
+function bookSlot(selectedRoom,username='demo',date,startTime,allocatedDuration,reason){
+  let item = JSON.parse(localStorage.getItem(date.toDateString()));
+  if(!item) item = {};
+  let room = item[rooms[selectedRoom].name];
+  if(!room) {
+    room=[]
+    item[rooms[selectedRoom].name]=room;
+  }
+  room.push({
+    username,
+    date,
+    startTime,
+    allocatedDuration,
+    reason
+  })
+  localStorage.setItem(date.toDateString(),JSON.stringify(item))
 }
 
 function Booking() {
@@ -76,7 +93,7 @@ function Booking() {
           >
             <TimeLineList
               items={rooms}
-              data={{ selectedTime, bookings: getbookings(date), position }}
+              data={{ selectedTime, bookings: getbookings(date.toDateString()), position }}
               ItemRenderer={TimeLine}
             />
           </TimeSlider>
@@ -104,8 +121,13 @@ function Booking() {
         }
         footer={
           <div
-            className="Booking-button"
-            onClick={() => setIsDialogOpen(false)}
+            className={`Booking-button${reason===''?' disabled':''}`}
+            onClick={() => {
+              bookSlot(selectedRoom,'demo',date,selectedTime,allocatedDuration,reason);
+              setSelectedTime('');
+              setDate(new Date())
+              setIsDialogOpen(false)
+            }}
           >
             Confirm
           </div>
