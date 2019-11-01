@@ -3,7 +3,7 @@ import "./TimeSlider.css";
 
 function checkInDuration(time,selectedTime,checkInDuration){
     if(selectedTime==='') return false;
-    let [hr,min] = selectedTime.split('-').map(x=>parseInt(x));
+    let [hr,min] = selectedTime.split(':').map(x=>parseInt(x));
     let selectedTimeInMinutes = hr*60+min;
     let duration = time-selectedTimeInMinutes;
     return duration>0 && duration<=checkInDuration;
@@ -54,7 +54,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
       let currentHour = currentTime.getHours();
       let currentMin = currentTime.getMinutes();
       let isCurrentTime = ((currentHour===hr)&&(Math.abs(currentMin-min)<step));
-      let value = `${hr}-${min}`;
+      let value = `${hr}:${min}`;
       let isSelected = value === selectedTime || checkInDuration(i,selectedTime,allocatedDuration) ;
       scale.push(<div  
                     key={i} 

@@ -39,7 +39,7 @@ function Booking() {
         <div className="Booking-room-times">
           <TimeSlider onSelect={(time)=>{setSelectedTime(time)}} selectedTime={selectedTime} 
               allocatedDuration={allocatedDuration}>
-            <TimeLineList items={rooms} ItemRenderer={TimeLine} />
+            <TimeLineList items={rooms} data={{selectedTime}} ItemRenderer={TimeLine} />
           </TimeSlider>
         </div>
       </div>
