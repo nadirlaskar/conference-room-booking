@@ -17,7 +17,7 @@
 }
 
 .TimeLine-cell-booked {
-    background-color: red;
+    background-color: #C62828;
 }
 
 .-TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
