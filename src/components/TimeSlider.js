@@ -10,7 +10,7 @@ function checkInDuration(time,selectedTime,checkInDuration){
 }
 
 function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDuration, onScrollPositionChange }) {
-  let scale = [], hr=0, min=0;
+  let scale = [], hr=minTime/60, min=0;
   const el = useRef(null);
   const [currentTime,setCurrentTime]  = useState(new Date());
   const [isLoaded,setLoaded] = useState(false);
@@ -51,12 +51,12 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
       clearTimeout(continueScroll);
   }
 
-  for(let i=0;i<maxTime;i+=step){
-      if(i>59&&i%60===0) {
+  for(let i=minTime;i<maxTime;i+=step){
+      if(i>minTime+59&&i%60===0) {
          hr++;
          min=0
       }
-      else if(i>0) min+=step;
+      else if(i>minTime) min+=step;
       let currentHour = currentTime.getHours();
       let currentMin = currentTime.getMinutes();
       let isCurrentTime = ((currentHour===hr)&&(Math.abs(currentMin-min)<step));
@@ -93,8 +93,8 @@ function TimeSlider({ currentTime, selectedTime, onSelect, children, allocatedDu
   return (
     <div className='TimeSlider-container'>
       <TimeScale
-        minTime={0}
-        maxTime={23 * 60}
+        minTime={9 * 60}
+        maxTime={18 * 60}
         step={5}
         selectedTime={selectedTime}
         currentTime={currentTime}
