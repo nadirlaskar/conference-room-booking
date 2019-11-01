@@ -6,7 +6,7 @@ function List({ items, selected = 0, onSelect }) {
     <ul className="List-main">
       {items.map((x, id) => (
         <li
-          className={selected === id ? "List-selected-item" : ""}
+          className={selected === id ? "List-selected-item" : null}
           key={id}
           onClick={() => onSelect(id, x)}
         >

@@ -9,18 +9,16 @@ ul.List-main li {
 }
 
 ul.List-main li:not(:last-child) {
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #eeeeee;
 }
 
 ul.List-main li.List-selected-item,
 ul.List-main li:active {
-    border: none;
     background: #09d3ac;
     color: white;
 }
 
 ul.List-main li:not(.List-selected-item):hover {
-    border: none;
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }
