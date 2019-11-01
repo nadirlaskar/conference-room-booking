@@ -60,7 +60,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
       let currentHour = currentTime.getHours();
       let currentMin = currentTime.getMinutes();
       let isCurrentTime = ((currentHour===hr)&&(Math.abs(currentMin-min)<step));
-      let value = `${hr}:${min}`;
+      let value = `${hr<10?'0':''}${hr}:${min<10?'0':''}${min}`;
       let isSelected = value === selectedTime || checkInDuration(i,selectedTime,allocatedDuration) ;
       scale.push(<div  
                     key={i} 
@@ -71,7 +71,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
                     }
                     onClick={(e)=>onSelect(e.target.getAttribute('value'))}
                 >
-                    {`${hr<10?'0':''}${hr}:${min<10?'0':''}${min}`}
+                    {value}
                 </div>);
   }
   return (
