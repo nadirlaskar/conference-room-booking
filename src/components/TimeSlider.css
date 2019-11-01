@@ -1,0 +1,56 @@
+.TimeSlider-container {
+    border: 1px solid #eee;
+}
+
+.TimeSlider-main {
+    margin: 0 32px;
+}
+
+.TimeScale-container {
+    display: flex;
+    user-select: none;
+}
+
+.TimeScale {
+    display: inline-block;
+    font-size: 24px;
+    text-align: center;
+    line-height: 20px;
+    margin: 4px 8px;
+}
+
+.TimeScale.button {
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    background: #09d3ac;
+    color: white;
+    cursor: pointer;
+}
+
+.TimeScale.button:active {
+    background: white;
+    color: #09d3ac;
+}
+
+.TimeScale-main {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    max-width: 80vw;
+    overflow: hidden;
+}
+
+.TimeScale-time-block {
+    margin: 0 8px;
+    color: #aaa;
+}
+
+.TimeScale-time-block-currentTime {
+    color: #09d3ac;
+}
+
+.TimeScale-time-block-selectedTime {
+    color: #09d3ac;
+    font-weight: bold;
+}

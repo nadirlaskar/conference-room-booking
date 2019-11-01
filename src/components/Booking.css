@@ -12,9 +12,18 @@
 }
 
 .Booking-content {
-    align-self: right;
+    display: flex;
     position: relative;
-    border: 0px solid yellow;
+}
+
+.Booking-content .Booking-room-names {
+    position: relative;
+    top: 40px;
+    width: 20%;
+}
+
+.Booking-content .Booking-room-times {
+    margin: 8px;
 }
 
 .Booking-counter {

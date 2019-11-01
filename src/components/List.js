@@ -4,7 +4,7 @@ import "./List.css";
 function ListItem({ id, item }) {
   return item.name;
 }
-function List({ items, selected = null, onSelect, ItemRenderer = ListItem }) {
+function List({ items, selected = null, onSelect=()=>{}, ItemRenderer = ListItem }) {
   return (
     <ul className="List-main">
       {items.map((item, id) => {
