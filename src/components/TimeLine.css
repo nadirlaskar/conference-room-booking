@@ -20,8 +20,13 @@
     background-color: #C62828;
 }
 
-.-TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
+.TimeLine-cell-booked-edge {
+    margin-right: 0;
+}
+
+.TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
     margin-right: 0;
     margin-left: 0;
     padding: 0 8px;
+    border-left: 1px solid #fff;
 }
