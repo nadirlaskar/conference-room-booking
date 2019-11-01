@@ -1,24 +1,25 @@
-ul.List-main {
+.List-main {
     list-style: none;
     padding: 0px;
+    user-select: none;
 }
 
-ul.List-main li {
+.List-main .List-item {
     padding: 8px;
     font-size: 20px;
 }
 
-ul.List-main li:not(:last-child) {
+.List-main .List-item:not(:last-child) {
     border-bottom: 1px solid #eeeeee;
 }
 
-ul.List-main li.List-selected-item,
-ul.List-main li:active {
+.List-main .List-item.List-selected-item,
+.List-main .List-item:active {
     background: #09d3ac;
     color: white;
 }
 
-ul.List-main li:not(.List-selected-item):hover {
+.List-main .List-item:not(.List-selected-item):hover {
     background: rgba(0, 0, 0, 0.5);
     color: white;
 }

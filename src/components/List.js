@@ -6,11 +6,11 @@ function ListItem({ id, item }) {
 }
 function List({ items, selected = null, onSelect=()=>{}, ItemRenderer = ListItem, data }) {
   return (
-    <ul className="List-main">
+    <div className="List-main">
       {items.map((item, id) => {
         return (
-          <li
-            className={selected === id ? "List-selected-item" : null}
+          <div
+            className={selected === id ? "List-item List-selected-item" : 'List-item'}
             key={id}
             onClick={() => onSelect(id, item)}
           >
@@ -19,10 +19,10 @@ function List({ items, selected = null, onSelect=()=>{}, ItemRenderer = ListItem
               item={item}
               data={data}
             />
-          </li>
+          </div>
         );
       })}
-    </ul>
+    </div>
   );
 }
 
