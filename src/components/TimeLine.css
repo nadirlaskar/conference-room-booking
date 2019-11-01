@@ -20,7 +20,7 @@
     background-color: red;
 }
 
-.TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
+.-TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
     margin-right: 0;
     margin-left: 0;
     padding: 0 8px;

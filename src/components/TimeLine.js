@@ -26,7 +26,7 @@ function TimeLine({id, item, data}){
   for(let i=0;i<maxTime;i+=step){
     let isBooked = hashMap[i]?hashMap[i]:false;
     blocks.push(<div key={i} id={i} 
-        title={`This room is booked by ${isBooked.username}, from ${isBooked.startTime} for ${isBooked.allocatedDuration}mins`}
+        title={isBooked?`This room is booked by ${isBooked.username}, from ${isBooked.startTime} for ${isBooked.allocatedDuration}mins`:''}
         className={`TimeLine-cell${isBooked?" TimeLine-cell-booked":''}${isBooked&&(isBooked.start||isBooked.end)?' TimeLine-cell-booked-edge':''}`}></div>)
   }
 

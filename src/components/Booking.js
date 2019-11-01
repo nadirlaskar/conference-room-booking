@@ -17,7 +17,7 @@ function getbookings(date) {
       b[r.name] = {
         username: "demo",
         date,
-        startTime: "17:30",
+        startTime: `${new Date().getHours()}:${new Date().getMinutes()+20}`,
         allocatedDuration: 30,
         reason: "Meeting"
       };
