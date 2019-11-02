@@ -9,7 +9,9 @@ function TimeLine({id, item, data}){
     const el = useRef(null);
 
     useEffect(()=>{
-        el.current.scrollLeft=position;
+        if(el.current.scrollTo){
+            el.current.scrollTo({left:position, behaviour:'smooth'})
+        }else el.current.scrollLeft=position;
     });
 
     let hashMap = bookings[item.name]?bookings[item.name].reduce((map,booking)=>{

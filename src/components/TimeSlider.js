@@ -26,9 +26,12 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
   useEffect(()=>{
       if(!isLoaded){
           if(currentTimeScrollPosition>0) {
-              el.current.scrollLeft=currentTimeScrollPosition-el.current.getBoundingClientRect().left;
-              onScrollPositionChange(el.current.scrollLeft);
-              setCurrentTimeScrollPosition(el.current.scrollLeft);
+              let scrollPos=currentTimeScrollPosition-el.current.getBoundingClientRect().left;
+              if(el.current.scrollTo){
+                el.current.scrollTo({left: scrollPos, behavior:"smooth"})
+              } else el.current.scrollLeft+=scrollPos;
+              onScrollPositionChange(scrollPos);
+              setCurrentTimeScrollPosition(scrollPos);
             }
           setLoaded(currentTimeScrollPosition>0);
       }
@@ -40,15 +43,24 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
 
   const [continueScroll,setContinueScroll] = useState(-1);
 
+  let speedUp=1;
   const keepScrolling = (step)=>{
       if(el.current.scrollLeft+step>=(currentTimeScrollPosition)) {
-          el.current.scrollLeft+=step;
-          onScrollPositionChange(el.current.scrollLeft);
-        }
-      setContinueScroll(setTimeout(()=>keepScrolling(step),100));
+          if(el.current.scrollTo){
+            el.current.scrollTo({left: el.current.scrollLeft+step*speedUp, behavior:"smooth"})
+          } else el.current.scrollLeft+=(step*speedUp);
+          onScrollPositionChange( el.current.scrollLeft+step*speedUp);
+      }else{
+          el.current.scrollLeft = currentTimeScrollPosition;
+          onScrollPositionChange(currentTimeScrollPosition)
+          stopScrolling();
+      }
+      speedUp+=0.5;
+      setContinueScroll(setTimeout(()=>keepScrolling(step),200));
   }
 
   const stopScrolling = ()=>{
+      speedUp=0;
       clearTimeout(continueScroll);
   }
 
