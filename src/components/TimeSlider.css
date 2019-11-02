@@ -44,12 +44,13 @@
 
 .TimeScale-time-block {
     margin-left: 8px;
-    color: #aaa;
+    color: #c3c3c3;
     font-weight: bold;
+    max-width: 41px;
 }
 
 .TimeScale-time-block-currentTime {
-    color: #09d3ac;
+    color: #aaa;
 }
 
 .TimeScale-time-block-selectedTime {

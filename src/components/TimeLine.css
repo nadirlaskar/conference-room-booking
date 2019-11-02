@@ -26,5 +26,5 @@
 
 .TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
     margin-left: 0;
-    padding-left: 18px;
+    padding-left: 8px;
 }

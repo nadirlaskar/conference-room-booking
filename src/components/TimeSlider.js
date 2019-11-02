@@ -28,6 +28,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
           if(currentTimeScrollPosition>0) {
               el.current.scrollLeft=currentTimeScrollPosition-el.current.getBoundingClientRect().left;
               onScrollPositionChange(el.current.scrollLeft);
+              setCurrentTimeScrollPosition(el.current.scrollLeft);
             }
           setLoaded(currentTimeScrollPosition>0);
       }
@@ -40,7 +41,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
   const [continueScroll,setContinueScroll] = useState(-1);
 
   const keepScrolling = (step)=>{
-      if(el.current.scrollLeft+step>=(currentTimeScrollPosition-el.current.getBoundingClientRect().left)) {
+      if(el.current.scrollLeft+step>=(currentTimeScrollPosition)) {
           el.current.scrollLeft+=step;
           onScrollPositionChange(el.current.scrollLeft);
         }
@@ -51,6 +52,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
       clearTimeout(continueScroll);
   }
 
+  let isStartCurrentTime = false;
   for(let i=minTime;i<maxTime;i+=step){
       if(i>minTime+59&&i%60===0) {
          hr++;
@@ -64,7 +66,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
       let isSelected = value === selectedTime || checkInDuration(i,selectedTime,allocatedDuration) ;
       scale.push(<div  
                     key={i} 
-                    ref={measuredRef}
+                    ref={!isStartCurrentTime&&isCurrentTime?measuredRef:null}
                     value={value}
                     className={
                         `TimeScale-time-block${isCurrentTime?' TimeScale-time-block-currentTime':''}${isSelected?' TimeScale-time-block-selectedTime':''}`
@@ -73,6 +75,7 @@ function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDu
                 >
                     {value}
                 </div>);
+      isStartCurrentTime = isCurrentTime;
   }
   return (
     <div className="TimeScale-container">
