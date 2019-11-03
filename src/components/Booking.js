@@ -8,21 +8,22 @@ import TimeLineList from "./List";
 import TimeLine from "./TimeLine";
 import TimeSlider from "./TimeSlider";
 import Dialog from "./Dialog";
-
+let demo = null;
 function getbookings(date) {
   let item = localStorage.getItem(date);
   if (item) return JSON.parse(item);
   else {
-    return rooms.reduce((b, r, i) => {
+    demo = demo==null?rooms.reduce((b, r, i) => {
       b[r.name] = [{
         username: "demo",
         date,
-        startTime: `0${9}:${20}`,
-        allocatedDuration: 30,
+        startTime: `0${Math.floor(((Math.random()*17)+1))}:${Math.floor(((Math.random()*50)))}`,
+        allocatedDuration: Math.floor(((Math.random()*30)+30)),
         reason: "Meeting"
       }];
       return b;
-    }, {});
+    }, {}):demo;
+    return demo;
   }
 }
 
