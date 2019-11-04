@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Booking.css";
 import Counter from "./Counter";
 import Calender from "./Calender";
@@ -8,6 +8,7 @@ import TimeLineList from "./List";
 import TimeLine from "./TimeLine";
 import TimeSlider from "./TimeSlider";
 import Dialog from "./Dialog";
+import {makeId,removeItemFromIndex} from '../common/utils.js';
 let demo = null;
 function getbookings(date) {
   let item = localStorage.getItem(date);
@@ -15,6 +16,7 @@ function getbookings(date) {
   else {
     demo = demo==null?rooms.reduce((b, r, i) => {
       b[r.name] = [{
+        id: makeId(5),
         username: "demo",
         date,
         startTime: `0${Math.floor(((Math.random()*17)+1))}:${Math.floor(((Math.random()*50)))}`,
@@ -45,14 +47,31 @@ function bookSlot(selectedRoom,username='demo',date,startTime,allocatedDuration,
   localStorage.setItem(date.toDateString(),JSON.stringify(item))
 }
 
+function removeBooking({booking,room}){
+  let item = demo===null?JSON.parse(localStorage.getItem(booking.date)):demo;
+  let roomBookings = item[room];
+  let index = roomBookings.findIndex(x=>x.id===booking.id);
+  item[room] = removeItemFromIndex(roomBookings,index);
+  if(demo===null)
+    localStorage.setItem(booking.date,JSON.stringify(item));
+  else demo = item;
+}
+
 function Booking() {
   let [date, setDate] = useState(new Date());
   let [allocatedDuration, setAllocatedDuration] = useState(30);
   let [selectedRoom, setSelectedRoom] = useState(0);
   let [selectedTime, setSelectedTime] = useState("");
   let [position, setPosition] = useState(-1);
-  let [isDialogOpen, setIsDialogOpen] = useState(false);
+  let [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  let [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
   let [reason, setReason] = useState("");
+  let [bookingToDelete, setBookingToDelete] =  useState(null);
+
+  useEffect(()=>{
+    if(bookingToDelete)
+      setIsRemoveDialogOpen(true);
+  },[bookingToDelete])
 
   return (
     <div className="Booking-main">
@@ -72,7 +91,7 @@ function Booking() {
         </div>
         <div
           className={`Booking-button ${selectedTime===""?' disabled':''}`}
-          onClick={() => setIsDialogOpen(true&&selectedTime!=="")}
+          onClick={() => setIsAddDialogOpen(true&&selectedTime!=="")}
         >
           Book Slot
         </div>
@@ -96,14 +115,16 @@ function Booking() {
           >
             <TimeLineList
               items={rooms}
-              data={{ selectedTime, bookings: getbookings(date.toDateString()), position }}
+              data={{ selectedTime,
+                      onDelete: (booking)=> setBookingToDelete(booking),
+                      bookings: getbookings(date.toDateString()), position }}
               ItemRenderer={TimeLine}
             />
           </TimeSlider>
         </div>
       </div>
       <Dialog
-        open={isDialogOpen}
+        open={isAddDialogOpen}
         message={`Do you want to book ${
           rooms[selectedRoom].name
         } on ${date.toDateString()} at ${selectedTime}hrs for ${allocatedDuration} mins ?`}
@@ -129,16 +150,45 @@ function Booking() {
               bookSlot(selectedRoom,'demo',date,selectedTime,allocatedDuration,reason);
               setSelectedTime('');
               setDate(new Date())
-              setIsDialogOpen(false)
+              setIsAddDialogOpen(false)
             }}
           >
             Confirm
           </div>
         }
         onCancle={() => {
-          setIsDialogOpen(false);
+          setIsAddDialogOpen(false);
         }}
       />
+
+      {isRemoveDialogOpen?
+        <Dialog
+          open={isRemoveDialogOpen}
+          message={`Do you want to delete ${
+            bookingToDelete.room
+          } on ${bookingToDelete.booking.date} at ${bookingToDelete.booking.startTime}hrs for ${bookingToDelete.booking.allocatedDuration} mins ?`}
+          content={
+            <div className="Booking-reason">
+              {`The room was booked for the following reason, ${bookingToDelete.booking.reason}`}
+            </div>
+          }
+          footer={
+            <div
+              className={`Booking-button`}
+              onClick={() => {
+                setIsRemoveDialogOpen(false);
+                removeBooking(bookingToDelete);
+                setBookingToDelete(null);
+              }}
+            >
+              Confirm
+            </div>
+          }
+          onCancle={() => {
+            setIsRemoveDialogOpen(false);
+            setBookingToDelete(null);
+          }}
+        />:null}
     </div>
   );
 }

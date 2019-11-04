@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./TimeLine.css";
 
 function TimeLine({id, item, data}){
-    let { bookings, selectedTime, position } =  data;
+    let { bookings, selectedTime, position, onDelete=()=>{} } =  data;
     let maxTime = 18*60, minTime = 9*60, step=5;
     let blocks = [];
 
@@ -27,9 +27,19 @@ function TimeLine({id, item, data}){
 
   for(let i=minTime;i<maxTime;i+=step){
     let isBooked = hashMap[i]?hashMap[i]:false;
-    blocks.push(<div key={i} id={i} 
-        title={isBooked?`This slot is booked by ${isBooked.username}, from ${isBooked.startTime} for ${isBooked.allocatedDuration}mins.\nReason : ${isBooked.reason}`:'Slot available for booking'}
-        className={`TimeLine-cell${isBooked?" TimeLine-cell-booked":''}${isBooked&&(isBooked.start||isBooked.end)?' TimeLine-cell-booked-edge':''}`}></div>)
+    blocks.push(
+        <div className="TimeLine-cell-action-wrapper">
+            <div key={i} id={i} 
+                title={isBooked?`This slot is booked by ${isBooked.username}, from ${isBooked.startTime} for ${isBooked.allocatedDuration}mins.\nReason : ${isBooked.reason}`:'Slot available for booking'}
+                className={`TimeLine-cell${isBooked?" TimeLine-cell-booked":''}${isBooked&&(isBooked.start||isBooked.end)?' TimeLine-cell-booked-edge':''}`}>
+            </div>
+            {isBooked?
+            <div className="TimeLine-cell-action-button"
+                 onClick={()=>onDelete({booking: isBooked, room:item.name})}>
+                    Delete
+            </div>:null}
+        </div>
+    )
   }
 
     return (<div className="TimeLine-main" ref={el}>

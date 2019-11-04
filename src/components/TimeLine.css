@@ -30,3 +30,24 @@
     margin-left: 0;
     padding-left: 8px;
 }
+
+.TimeLine-cell-action-wrapper {
+    position: relative;
+}
+
+.TimeLine-cell-action-button {
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.5em;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.TimeLine-cell-action-wrapper:hover .TimeLine-cell-action-button {
+    visibility: visible;
+}

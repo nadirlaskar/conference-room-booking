@@ -50,6 +50,10 @@
     cursor: pointer;
 }
 
+.Booking-reason {
+    font-size: 20px;
+}
+
 .Booking-button.disabled {
     background: #ccc!important;
     pointer-events: none;
