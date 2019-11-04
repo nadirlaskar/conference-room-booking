@@ -5,14 +5,15 @@
     max-width: 80vw;
     overflow: hidden;
     white-space: nowrap;
-    max-height: 23px;
+    max-height: 20px;
 }
 
 .TimeLine-cell {
     font-size: 16px;
     min-width: 47px;
-    height: 27px;
-    max-height: 30px;
+    max-width: 47px;
+    height: 20px;
+    max-height: 20px;
     background: #ccc;
     margin-left: 8px;
 }

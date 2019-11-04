@@ -7,6 +7,7 @@ ul.List-main {
 ul.List-main li {
     padding: 8px;
     font-size: 20px;
+    line-height: 20px;
 }
 
 ul.List-main li:not(:last-child) {
