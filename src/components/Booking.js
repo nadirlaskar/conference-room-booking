@@ -12,7 +12,10 @@ import {makeId,removeItemFromIndex} from '../common/utils.js';
 let demo = null;
 function getbookings(date) {
   let item = localStorage.getItem(date);
-  if (item) return JSON.parse(item);
+  if (item) {
+    demo = null;
+    return JSON.parse(item);
+  }
   else {
     demo = demo==null?rooms.reduce((b, r, i) => {
       b[r.name] = [{
@@ -38,8 +41,9 @@ function bookSlot(selectedRoom,username='demo',date,startTime,allocatedDuration,
     item[rooms[selectedRoom].name]=room;
   }
   room.push({
+    id: makeId(5),
     username,
-    date,
+    date: date.toDateString(),
     startTime,
     allocatedDuration,
     reason
@@ -52,8 +56,9 @@ function removeBooking({booking,room}){
   let roomBookings = item[room];
   let index = roomBookings.findIndex(x=>x.id===booking.id);
   item[room] = removeItemFromIndex(roomBookings,index);
-  if(demo===null)
+  if(demo===null){
     localStorage.setItem(booking.date,JSON.stringify(item));
+  }
   else demo = item;
 }
 
@@ -135,7 +140,7 @@ function Booking() {
                 <legend>Why are you booking the slot ?</legend>
                 <textarea
                   name="reason"
-                  placeholder={"Add your reason here"}
+                  placeholder={"Add your agenda here"}
                   value={reason}
                   onChange={e => setReason(e.target.value)}
                 ></textarea>
@@ -169,7 +174,7 @@ function Booking() {
           } on ${bookingToDelete.booking.date} at ${bookingToDelete.booking.startTime}hrs for ${bookingToDelete.booking.allocatedDuration} mins ?`}
           content={
             <div className="Booking-reason">
-              {`The room was booked for the following reason, ${bookingToDelete.booking.reason}`}
+              {`The room was booked for the following agenda, ${bookingToDelete.booking.reason}`}
             </div>
           }
           footer={
