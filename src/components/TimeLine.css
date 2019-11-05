@@ -22,8 +22,13 @@
     background-color: #C62828;
 }
 
-.TimeLine-cell-booked-edge {
-    margin-right: 0;
+.TimeLine-cell-booked-edge-right {
+    margin-left: 0;
+}
+
+.TimeLine-cell.TimeLine-cell-booked.TimeLine-cell-booked-edge-left {
+    margin-left: 8px;
+    padding-left: 0px;
 }
 
 .TimeLine-cell-booked:not(.TimeLine-cell-booked-edge) {
@@ -50,4 +55,8 @@
 
 .TimeLine-cell-action-wrapper:hover .TimeLine-cell-action-button {
     visibility: visible;
+}
+
+.TimeLine-cell-selected {
+    background-color: #09d3ac;
 }

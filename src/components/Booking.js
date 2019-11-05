@@ -122,6 +122,8 @@ function Booking() {
               items={rooms}
               selected={selectedRoom}
               data={{ selectedTime,
+                      selectedRoom:rooms[selectedRoom].name,
+                      selectedAllocatedDuration: allocatedDuration,
                       onDelete: (booking)=> setBookingToDelete(booking),
                       bookings: getbookings(date.toDateString()), position }}
               ItemRenderer={TimeLine}

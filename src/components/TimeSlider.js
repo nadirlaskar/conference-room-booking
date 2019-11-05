@@ -1,13 +1,7 @@
 import React, {useRef, useEffect,useState, useCallback} from "react";
 import "./TimeSlider.css";
 
-function checkInDuration(time,selectedTime,checkInDuration){
-    if(selectedTime==='') return false;
-    let [hr,min] = selectedTime.split(':').map(x=>parseInt(x));
-    let selectedTimeInMinutes = hr*60+min;
-    let duration = time-selectedTimeInMinutes;
-    return duration>0 && duration<=checkInDuration;
-}
+import {checkInDuration} from '../common/utils';
 
 function TimeScale({ minTime, maxTime, step, onSelect, selectedTime, allocatedDuration, onScrollPositionChange }) {
   let scale = [], hr=minTime/60, min=0;
