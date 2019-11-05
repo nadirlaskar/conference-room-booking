@@ -4,7 +4,7 @@ import {checkInDuration} from '../common/utils';
 import "./TimeLine.css";
 
 function TimeLine({id, item, data}){
-    let { bookings, selectedTime, selectedAllocatedDuration, selectedRoom, position, onDelete=()=>{} } =  data;
+    let { bookings, selectedTime, selectedAllocatedDuration, selectedRoom, position, onDelete=()=>{}, onSelect } =  data;
     let maxTime = 18*60, minTime = 9*60, step=5;
     let blocks = [];
 
@@ -29,8 +29,12 @@ function TimeLine({id, item, data}){
   for(let i=minTime;i<maxTime;i+=step){
     let isBooked = hashMap[i]?hashMap[i]:false;
     let inDuration =  item.name===selectedRoom&&checkInDuration(i,selectedTime,selectedAllocatedDuration)
+    let hr = Math.floor(i/60), min = i%60;
+    let value = `${hr<10?'0':''}${hr}:${min<10?'0':''}${min}`
     blocks.push(
         <div title={isBooked?`This slot is booked by ${isBooked.username}, from ${isBooked.startTime} for ${isBooked.allocatedDuration}mins.\nAgenda : \n${isBooked.reason}`:'Slot available for booking'}    
+             value={value}
+             onClick={(e)=>onSelect(e.currentTarget.getAttribute('value'),item.name)}
              className="TimeLine-cell-action-wrapper">
                 <div key={i} id={i} 
                 className={`TimeLine-cell${isBooked?" TimeLine-cell-booked":inDuration?' TimeLine-cell-selected':''}${isBooked&&(isBooked.start||isBooked.end)?` TimeLine-cell-booked-edge-${(isBooked.start)?'left':'right'}`:''}`}>

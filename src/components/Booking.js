@@ -125,6 +125,10 @@ function Booking() {
                       selectedRoom:rooms[selectedRoom].name,
                       selectedAllocatedDuration: allocatedDuration,
                       onDelete: (booking)=> setBookingToDelete(booking),
+                      onSelect: (time,room) => {
+                        setSelectedRoom(rooms.findIndex(x=>x.name===room))
+                        setSelectedTime(time)
+                      },
                       bookings: getbookings(date.toDateString()), position }}
               ItemRenderer={TimeLine}
             />
