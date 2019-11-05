@@ -120,6 +120,7 @@ function Booking() {
           >
             <TimeLineList
               items={rooms}
+              selected={selectedRoom}
               data={{ selectedTime,
                       onDelete: (booking)=> setBookingToDelete(booking),
                       bookings: getbookings(date.toDateString()), position }}

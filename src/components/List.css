@@ -16,8 +16,8 @@ ul.List-main li:not(:last-child) {
 
 ul.List-main li.List-selected-item,
 ul.List-main li:active {
-    background: #09d3ac;
-    color: white;
+    background: #eee;
+    color: #09d3ac;
 }
 
 ul.List-main li:not(.List-selected-item):hover {
